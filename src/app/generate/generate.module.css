@@ -1,0 +1,54 @@
+.main {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.back {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.back:hover {
+  color: var(--accent-purple-hover);
+}
+
+.title {
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.nicheSelected {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.emoji {
+  font-size: 2.5rem;
+}
+
+.nameNe {
+  font-family: var(--font-devanagari);
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.hint {
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.comingSoon {
+  padding: 1.25rem;
+  border-radius: 12px;
+  background: var(--accent-purple-glow);
+  border: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
