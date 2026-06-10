@@ -1,66 +1,55 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { AppHeader } from "@/components/layout/AppHeader";
+import { StatsRow } from "@/components/home/StatsRow";
+import { NicheGrid } from "@/components/home/NicheGrid";
+import { RecentVideos } from "@/components/home/RecentVideos";
+import { prisma } from "@/lib/prisma";
+import { getDashboardStats } from "@/lib/stats";
+import styles from "./home.module.css";
 
-export default function Home() {
+export default async function HomePage() {
+  const [stats, niches, recentVideos] = await Promise.all([
+    getDashboardStats(),
+    prisma.niche.findMany({
+      where: { isActive: true },
+      orderBy: { sortOrder: "asc" },
+      select: {
+        id: true,
+        slug: true,
+        emoji: true,
+        nameEn: true,
+        nameNe: true,
+        language: true,
+        captionColor: true,
+        exampleHooks: true,
+      },
+    }),
+    prisma.video.findMany({
+      take: 6,
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        title: true,
+        status: true,
+        createdAt: true,
+        niche: { select: { emoji: true, nameEn: true } },
+      },
+    }),
+  ]);
+
   return (
-    <div className={styles.page}>
+    <>
+      <AppHeader />
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.tsx file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
+        <div className={styles.hero}>
+          <h1 className={styles.heroTitle}>Dashboard</h1>
+          <p className={styles.heroSubtitle}>
+            Generate viral 60–90s shorts in Nepali &amp; Hindi
           </p>
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+        <StatsRow stats={stats} />
+        <NicheGrid niches={niches} />
+        <RecentVideos videos={recentVideos} />
       </main>
-    </div>
+    </>
   );
 }
