@@ -1,4 +1,4 @@
-import { callClaude, extractJson } from "@/lib/anthropic";
+import { callLlm, extractJson } from "@/lib/llm";
 import { ScriptJsonSchema, type ScriptJson, type VideoLanguage } from "@/types/script";
 
 type NicheForScript = {
@@ -23,7 +23,7 @@ NICHE: ${niche.nameEn}
 Follow the script structure and JSON output format from your system instructions exactly.
 Return ONLY the JSON object — no markdown fences, no explanation.`;
 
-  const raw = await callClaude({
+  const raw = await callLlm({
     system: niche.systemPrompt,
     user: userMessage,
     maxTokens: 4096,
