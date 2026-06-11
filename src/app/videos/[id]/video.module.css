@@ -1,0 +1,133 @@
+.main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 4rem;
+}
+
+.back {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.back:hover {
+  color: var(--accent-purple-hover);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.nicheBadge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-family: var(--font-devanagari);
+  line-height: 1.4;
+  margin-bottom: 1.5rem;
+}
+
+.status {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+}
+
+.status_PENDING { background: var(--color-success-bg); color: var(--color-success); }
+.status_SCRIPTING { background: var(--color-info-bg); color: var(--color-info); }
+.status_FAILED { background: var(--color-danger-bg); color: var(--color-danger); }
+.status_RENDERING { background: var(--color-warning-bg); color: var(--color-warning); }
+.status_PUBLISHED { background: var(--color-success-bg); color: var(--color-success); }
+
+.errorBox {
+  padding: 1rem;
+  border-radius: 10px;
+  background: var(--color-danger-bg);
+  border: 1px solid var(--color-danger);
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  margin-bottom: 1.5rem;
+}
+
+.noScript {
+  padding: 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.generateLink {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--accent-purple-hover);
+  font-weight: 600;
+}
+
+.scriptArea {
+  margin-bottom: 1.5rem;
+}
+
+.scriptToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.scriptHeading {
+  font-size: 1.1rem;
+}
+
+.regenBtn {
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.regenBtn:hover:not(:disabled) {
+  border-color: var(--accent-purple);
+  color: var(--accent-purple-hover);
+}
+
+.regenBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.regenError {
+  color: var(--color-danger);
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+.scriptPanel {
+  padding: 1.5rem;
+}
+
+.phaseNote {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.meta {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
