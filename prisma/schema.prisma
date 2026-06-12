@@ -93,6 +93,8 @@ model Video {
   creatorId       String
   creator         User             @relation(fields: [creatorId], references: [id])
   scriptJson      Json?
+  voiceId         String?
+  voiceProvider   String?
   audioPath       String?
   videoPath       String?
   thumbnailPath   String?
