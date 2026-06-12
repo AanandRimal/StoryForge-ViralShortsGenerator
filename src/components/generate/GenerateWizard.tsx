@@ -242,11 +242,11 @@ export function GenerateWizard({
             onClick={handleGenerateScript}
             disabled={generating || !effectiveTopic}
           >
-            {generating ? "Generating script with Claude…" : "Generate Script →"}
+            {generating ? "Generating script…" : "Generate Script →"}
           </button>
 
           <p className={styles.phaseNote}>
-            Voice, visuals, and rendering come in Phases 3–5.
+            Generate voice on the video detail page. Visuals and rendering — Phases 4–5.
           </p>
         </section>
       )}
@@ -257,7 +257,7 @@ export function GenerateWizard({
             <span className={styles.successIcon}>✓</span>
             <div>
               <h2>Script Generated</h2>
-              <p>Claude Haiku wrote your {script.scenes.length}-scene viral short</p>
+              <p>Your {script.scenes.length}-scene viral short script is ready</p>
             </div>
           </div>
 

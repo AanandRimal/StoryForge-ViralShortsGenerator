@@ -1,4 +1,4 @@
-import { callClaude, extractJson } from "@/lib/anthropic";
+import { callLlm, extractJson } from "@/lib/llm";
 import { ScriptJsonSchema, type ScriptJson, type VideoLanguage } from "@/types/script";
 
 type NicheForScript = {
@@ -21,9 +21,10 @@ LANGUAGE: ${language} (use Nepali, Hindi, or natural mix as specified)
 NICHE: ${niche.nameEn}
 
 Follow the script structure and JSON output format from your system instructions exactly.
+Ensure that the "hashtags" array has at least 3 relevant hashtags.
 Return ONLY the JSON object — no markdown fences, no explanation.`;
 
-  const raw = await callClaude({
+  const raw = await callLlm({
     system: niche.systemPrompt,
     user: userMessage,
     maxTokens: 4096,

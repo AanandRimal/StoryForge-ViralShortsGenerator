@@ -1,4 +1,4 @@
-import { callClaude, extractJson } from "@/lib/anthropic";
+import { callLlm, extractJson } from "@/lib/llm";
 import { prisma } from "@/lib/prisma";
 import {
   TopicSuggestionsSchema,
@@ -51,7 +51,7 @@ export async function generateTopicSuggestions(
   niche: NicheForTopics,
   language: VideoLanguage,
 ): Promise<TopicSuggestion[]> {
-  const raw = await callClaude({
+  const raw = await callLlm({
     system: TOPIC_SYSTEM,
     user: buildTopicUserPrompt(niche, language),
     maxTokens: 1024,

@@ -23,6 +23,7 @@ export default async function VideoDetailPage({
           nameNe: true,
           emoji: true,
           captionColor: true,
+          defaultVoiceId: true,
         },
       },
     },
@@ -45,7 +46,7 @@ export default async function VideoDetailPage({
             <span>{video.niche.emoji}</span>
             <span>{video.niche.nameEn}</span>
           </div>
-          <StatusBadge status={video.status} />
+          <StatusBadge status={video.status} hasAudio={!!video.audioPath} />
         </div>
 
         <h1 className={styles.title}>
@@ -64,6 +65,11 @@ export default async function VideoDetailPage({
             initialScript={script}
             accentColor={video.niche.captionColor}
             topic={video.title ?? ""}
+            initialAudioPath={video.audioPath}
+            initialVoiceId={video.voiceId}
+            initialProvider={video.voiceProvider}
+            nicheDefaultVoice={video.niche.defaultVoiceId}
+            initialStatus={video.status}
           />
         ) : (
           <div className={`glass-panel ${styles.noScript}`}>
@@ -85,9 +91,9 @@ export default async function VideoDetailPage({
   );
 }
 
-function StatusBadge({ status }: { status: string }) {
+function StatusBadge({ status, hasAudio }: { status: string; hasAudio: boolean }) {
   const labels: Record<string, string> = {
-    PENDING: "Script Ready",
+    PENDING: hasAudio ? "Voice Ready" : "Script Ready",
     SCRIPTING: "Scripting",
     VOICING: "Voicing",
     FETCHING_VISUALS: "Fetching Visuals",

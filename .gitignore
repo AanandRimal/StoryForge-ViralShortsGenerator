@@ -43,3 +43,8 @@ next-env.d.ts
 /src/generated/prisma
 
 bin/
+
+# Generated media (keep directory structure)
+public/outputs/audio/*.mp3
+public/outputs/video/*.mp4
+worker/venv/
