@@ -90,6 +90,9 @@ export async function POST(
         scriptJson: script,
         durationSeconds,
         status: "PENDING",
+        audioPath: null,
+        voiceId: null,
+        voiceProvider: null,
       },
       include: {
         niche: {
