@@ -21,6 +21,7 @@ LANGUAGE: ${language} (use Nepali, Hindi, or natural mix as specified)
 NICHE: ${niche.nameEn}
 
 Follow the script structure and JSON output format from your system instructions exactly.
+Ensure that the "hashtags" array has at least 3 relevant hashtags.
 Return ONLY the JSON object — no markdown fences, no explanation.`;
 
   const raw = await callLlm({

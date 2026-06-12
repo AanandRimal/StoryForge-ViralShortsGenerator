@@ -1,0 +1,142 @@
+.panel {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.heading {
+  font-size: 1.1rem;
+}
+
+.providerBadge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+  background: var(--color-info-bg);
+  color: var(--color-info);
+  font-weight: 500;
+}
+
+.voiceGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.voiceCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.2rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.voiceCard:hover:not(:disabled) {
+  border-color: var(--border-color-hover);
+  background: var(--bg-card-hover);
+}
+
+.voiceCardActive {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple-glow);
+}
+
+.voiceCard:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.voiceLabel {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.voiceDesc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.voiceId {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  font-family: monospace;
+  margin-top: 0.25rem;
+}
+
+.error {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.generateBtn {
+  width: 100%;
+  padding: 0.875rem;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent-purple);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.generateBtn:hover:not(:disabled) {
+  background: var(--accent-purple-hover);
+}
+
+.generateBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.playerLabel {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+}
+
+.audio {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.statusHint {
+  font-size: 0.85rem;
+  color: var(--color-info);
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 480px) {
+  .voiceGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ScriptViewer } from "@/components/generate/ScriptViewer";
+import { VoicePanel } from "@/components/videos/VoicePanel";
 import type { ScriptJson } from "@/types/script";
 import styles from "./video.module.css";
 
@@ -10,11 +11,21 @@ export function VideoDetailClient({
   initialScript,
   accentColor,
   topic,
+  initialAudioPath,
+  initialVoiceId,
+  initialProvider,
+  nicheDefaultVoice,
+  initialStatus,
 }: {
   videoId: string;
   initialScript: ScriptJson;
   accentColor: string;
   topic: string;
+  initialAudioPath: string | null;
+  initialVoiceId: string | null;
+  initialProvider: string | null;
+  nicheDefaultVoice: string;
+  initialStatus: string;
 }) {
   const [script, setScript] = useState(initialScript);
   const [regenerating, setRegenerating] = useState(false);
@@ -47,28 +58,40 @@ export function VideoDetailClient({
   }
 
   return (
-    <div className={styles.scriptArea}>
-      <div className={styles.scriptToolbar}>
-        <h2 className={styles.scriptHeading}>Script</h2>
-        <button
-          type="button"
-          className={styles.regenBtn}
-          onClick={handleRegenerate}
-          disabled={regenerating}
-        >
-          {regenerating ? "Regenerating…" : "↻ Regenerate Script"}
-        </button>
+    <>
+      <VoicePanel
+        videoId={videoId}
+        script={script}
+        initialAudioPath={initialAudioPath}
+        initialVoiceId={initialVoiceId}
+        initialProvider={initialProvider}
+        nicheDefaultVoice={nicheDefaultVoice}
+        initialStatus={initialStatus}
+      />
+
+      <div className={styles.scriptArea}>
+        <div className={styles.scriptToolbar}>
+          <h2 className={styles.scriptHeading}>Script</h2>
+          <button
+            type="button"
+            className={styles.regenBtn}
+            onClick={handleRegenerate}
+            disabled={regenerating}
+          >
+            {regenerating ? "Regenerating…" : "↻ Regenerate Script"}
+          </button>
+        </div>
+
+        {error && <p className={styles.regenError}>{error}</p>}
+
+        <div className={`glass-panel ${styles.scriptPanel}`}>
+          <ScriptViewer script={script} accentColor={accentColor} />
+        </div>
+
+        <p className={styles.phaseNote}>
+          Visual pipeline and FFmpeg rendering — Phases 4–5.
+        </p>
       </div>
-
-      {error && <p className={styles.regenError}>{error}</p>}
-
-      <div className={`glass-panel ${styles.scriptPanel}`}>
-        <ScriptViewer script={script} accentColor={accentColor} />
-      </div>
-
-      <p className={styles.phaseNote}>
-        Voice generation, visuals, and rendering — Phase 3 onwards.
-      </p>
-    </div>
+    </>
   );
 }
