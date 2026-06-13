@@ -96,6 +96,8 @@ model Video {
   voiceId         String?
   voiceProvider   String?
   audioPath       String?
+  visualsJson     Json?
+  visualStyle     String?          @default("PEXELS")
   videoPath       String?
   thumbnailPath   String?
   durationSeconds Float?
