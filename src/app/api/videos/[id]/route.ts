@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
+import { Prisma } from "@/generated/prisma/client";
 import { requireAuth } from "@/lib/api-auth";
 import { prisma } from "@/lib/prisma";
 import { generateScript } from "@/lib/script-generator";
+import { clearVisualsForVideo } from "@/lib/visual-storage";
 import type { ScriptJson, VideoLanguage } from "@/types/script";
 
 export async function GET(
@@ -83,6 +85,8 @@ export async function POST(
 
     const durationSeconds = script.scenes.reduce((sum, s) => sum + s.duration_seconds, 0);
 
+    await clearVisualsForVideo(id);
+
     const updated = await prisma.video.update({
       where: { id },
       data: {
@@ -93,6 +97,7 @@ export async function POST(
         audioPath: null,
         voiceId: null,
         voiceProvider: null,
+        visualsJson: Prisma.DbNull,
       },
       include: {
         niche: {

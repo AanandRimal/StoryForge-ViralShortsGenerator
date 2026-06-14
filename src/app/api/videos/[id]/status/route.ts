@@ -18,6 +18,8 @@ export async function GET(
       status: true,
       title: true,
       audioPath: true,
+      visualsJson: true,
+      visualStyle: true,
       videoPath: true,
       voiceId: true,
       voiceProvider: true,

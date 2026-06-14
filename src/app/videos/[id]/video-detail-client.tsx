@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { ScriptViewer } from "@/components/generate/ScriptViewer";
 import { VoicePanel } from "@/components/videos/VoicePanel";
+import { VisualsPanel } from "@/components/videos/VisualsPanel";
 import type { ScriptJson } from "@/types/script";
+import type { VisualsJson } from "@/types/visuals";
 import styles from "./video.module.css";
 
 export function VideoDetailClient({
@@ -16,6 +18,8 @@ export function VideoDetailClient({
   initialProvider,
   nicheDefaultVoice,
   initialStatus,
+  initialVisuals,
+  initialVisualStyle,
 }: {
   videoId: string;
   initialScript: ScriptJson;
@@ -26,6 +30,8 @@ export function VideoDetailClient({
   initialProvider: string | null;
   nicheDefaultVoice: string;
   initialStatus: string;
+  initialVisuals: VisualsJson | null;
+  initialVisualStyle: string | null;
 }) {
   const [script, setScript] = useState(initialScript);
   const [regenerating, setRegenerating] = useState(false);
@@ -50,6 +56,7 @@ export function VideoDetailClient({
       if (!res.ok) throw new Error(data.error ?? "Regeneration failed");
 
       setScript(data.script);
+      window.location.reload();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Regeneration failed");
     } finally {
@@ -66,6 +73,13 @@ export function VideoDetailClient({
         initialVoiceId={initialVoiceId}
         initialProvider={initialProvider}
         nicheDefaultVoice={nicheDefaultVoice}
+        initialStatus={initialStatus}
+      />
+
+      <VisualsPanel
+        videoId={videoId}
+        initialVisuals={initialVisuals}
+        initialStyle={initialVisualStyle}
         initialStatus={initialStatus}
       />
 
@@ -87,10 +101,6 @@ export function VideoDetailClient({
         <div className={`glass-panel ${styles.scriptPanel}`}>
           <ScriptViewer script={script} accentColor={accentColor} />
         </div>
-
-        <p className={styles.phaseNote}>
-          Visual pipeline and FFmpeg rendering — Phases 4–5.
-        </p>
       </div>
     </>
   );
