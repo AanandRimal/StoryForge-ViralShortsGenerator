@@ -1,0 +1,174 @@
+.panel {
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.heading {
+  font-size: 1.1rem;
+}
+
+.badge {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.625rem;
+  border-radius: 6px;
+  background: var(--color-success-bg);
+  color: var(--color-success);
+  font-weight: 500;
+}
+
+.styleGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.styleCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-card);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.styleCard:hover:not(:disabled) {
+  border-color: var(--border-color-hover);
+  background: var(--bg-card-hover);
+}
+
+.styleCardActive {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple-glow);
+}
+
+.styleCard:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.styleLabel {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.styleDesc {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.error {
+  color: var(--color-danger);
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.fetchBtn {
+  width: 100%;
+  padding: 0.875rem;
+  border-radius: 10px;
+  border: none;
+  background: var(--accent-purple);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 1rem;
+}
+
+.fetchBtn:hover:not(:disabled) {
+  background: var(--accent-purple-hover);
+}
+
+.fetchBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.hint {
+  font-size: 0.85rem;
+  color: var(--color-info);
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.sceneList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.sceneRow {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+}
+
+.sceneInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.sceneNum {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-purple);
+}
+
+.sceneKeyword {
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  font-style: italic;
+}
+
+.sceneSource {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+}
+
+.scenePreview {
+  width: 72px;
+  height: 128px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: var(--bg-darker);
+  flex-shrink: 0;
+}
+
+.phaseNote {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+@media (max-width: 480px) {
+  .styleGrid {
+    grid-template-columns: 1fr;
+  }
+}

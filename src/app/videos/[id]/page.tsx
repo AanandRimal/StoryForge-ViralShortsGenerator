@@ -4,6 +4,7 @@ import { AppHeader } from "@/components/layout/AppHeader";
 import { VideoDetailClient } from "./video-detail-client";
 import { prisma } from "@/lib/prisma";
 import type { ScriptJson } from "@/types/script";
+import type { VisualsJson } from "@/types/visuals";
 import styles from "./video.module.css";
 
 export default async function VideoDetailPage({
@@ -32,6 +33,7 @@ export default async function VideoDetailPage({
   if (!video) notFound();
 
   const script = video.scriptJson as ScriptJson | null;
+  const visuals = video.visualsJson as VisualsJson | null;
 
   return (
     <>
@@ -46,7 +48,12 @@ export default async function VideoDetailPage({
             <span>{video.niche.emoji}</span>
             <span>{video.niche.nameEn}</span>
           </div>
-          <StatusBadge status={video.status} hasAudio={!!video.audioPath} />
+          <StatusBadge
+            status={video.status}
+            hasAudio={!!video.audioPath}
+            hasVisuals={!!visuals?.scenes?.length}
+            hasVideo={!!video.videoPath}
+          />
         </div>
 
         <h1 className={styles.title}>
@@ -70,6 +77,11 @@ export default async function VideoDetailPage({
             initialProvider={video.voiceProvider}
             nicheDefaultVoice={video.niche.defaultVoiceId}
             initialStatus={video.status}
+            initialVisuals={visuals}
+            initialVisualStyle={video.visualStyle}
+            initialVideoPath={video.videoPath}
+            initialThumbnailPath={video.thumbnailPath}
+            initialDuration={video.durationSeconds}
           />
         ) : (
           <div className={`glass-panel ${styles.noScript}`}>
@@ -91,9 +103,24 @@ export default async function VideoDetailPage({
   );
 }
 
-function StatusBadge({ status, hasAudio }: { status: string; hasAudio: boolean }) {
+function StatusBadge({
+  status,
+  hasAudio,
+  hasVisuals,
+  hasVideo,
+}: {
+  status: string;
+  hasAudio: boolean;
+  hasVisuals: boolean;
+  hasVideo: boolean;
+}) {
+  let pendingLabel = "Script Ready";
+  if (hasVideo) pendingLabel = "Video Ready";
+  else if (hasVisuals) pendingLabel = "Visuals Ready";
+  else if (hasAudio) pendingLabel = "Voice Ready";
+
   const labels: Record<string, string> = {
-    PENDING: hasAudio ? "Voice Ready" : "Script Ready",
+    PENDING: pendingLabel,
     SCRIPTING: "Scripting",
     VOICING: "Voicing",
     FETCHING_VISUALS: "Fetching Visuals",
