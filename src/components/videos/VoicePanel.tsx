@@ -13,6 +13,7 @@ export function VoicePanel({
   initialProvider,
   nicheDefaultVoice,
   initialStatus,
+  onAudioChange,
 }: {
   videoId: string;
   script: ScriptJson;
@@ -21,6 +22,7 @@ export function VoicePanel({
   initialProvider: string | null;
   nicheDefaultVoice: string;
   initialStatus: string;
+  onAudioChange?: (audioPath: string | null) => void;
 }) {
   const [selectedVoice, setSelectedVoice] = useState(
     initialVoiceId ?? defaultVoiceForLanguage(script.language, nicheDefaultVoice),
@@ -38,13 +40,16 @@ export function VoicePanel({
 
     const v = data.video;
     setStatus(v.status);
-    if (v.audioPath) setAudioPath(v.audioPath);
+    if (v.audioPath) {
+      setAudioPath(v.audioPath);
+      onAudioChange?.(v.audioPath);
+    }
     if (v.voiceProvider) setProvider(v.voiceProvider);
     if (v.voiceId) setSelectedVoice(v.voiceId);
     if (v.errorMessage) setError(v.errorMessage);
 
     return v.status as string;
-  }, [videoId]);
+  }, [videoId, onAudioChange]);
 
   useEffect(() => {
     if (!generating) return;
@@ -74,6 +79,7 @@ export function VoicePanel({
       if (!res.ok) throw new Error(data.error ?? "Voice generation failed");
 
       setAudioPath(data.audioUrl);
+      onAudioChange?.(data.audioUrl);
       setProvider(data.provider);
       setStatus(data.video.status);
     } catch (err) {

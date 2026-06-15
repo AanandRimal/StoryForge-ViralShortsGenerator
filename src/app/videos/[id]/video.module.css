@@ -50,6 +50,7 @@
 .status_FETCHING_VISUALS { background: var(--color-warning-bg); color: var(--color-warning); }
 .status_FAILED { background: var(--color-danger-bg); color: var(--color-danger); }
 .status_RENDERING { background: var(--color-warning-bg); color: var(--color-warning); }
+.status_READY { background: var(--color-success-bg); color: var(--color-success); }
 .status_PUBLISHED { background: var(--color-success-bg); color: var(--color-success); }
 
 .errorBox {

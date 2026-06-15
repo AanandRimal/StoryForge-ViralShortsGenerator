@@ -21,6 +21,7 @@ export async function GET(
       visualsJson: true,
       visualStyle: true,
       videoPath: true,
+      thumbnailPath: true,
       voiceId: true,
       voiceProvider: true,
       errorMessage: true,

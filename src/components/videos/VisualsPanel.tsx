@@ -22,11 +22,13 @@ export function VisualsPanel({
   initialVisuals,
   initialStyle,
   initialStatus,
+  onVisualsChange,
 }: {
   videoId: string;
   initialVisuals: VisualsJson | null;
   initialStyle: string | null;
   initialStatus: string;
+  onVisualsChange?: (visuals: VisualsJson | null) => void;
 }) {
   const [style, setStyle] = useState<VisualStyle>(
     (initialStyle as VisualStyle) ?? "PEXELS",
@@ -41,10 +43,13 @@ export function VisualsPanel({
     const data = await res.json();
     if (!res.ok) return;
     setStatus(data.video.status);
-    if (data.video.visualsJson) setVisuals(data.video.visualsJson);
+    if (data.video.visualsJson) {
+      setVisuals(data.video.visualsJson);
+      onVisualsChange?.(data.video.visualsJson);
+    }
     if (data.video.errorMessage) setError(data.video.errorMessage);
     return data.video.status as string;
-  }, [videoId]);
+  }, [videoId, onVisualsChange]);
 
   useEffect(() => {
     if (!fetching) return;
@@ -70,6 +75,7 @@ export function VisualsPanel({
       if (!res.ok) throw new Error(data.error ?? "Visual fetch failed");
 
       setVisuals(data.visuals);
+      onVisualsChange?.(data.visuals);
       setStatus(data.video.status);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Visual fetch failed");
@@ -156,7 +162,7 @@ export function VisualsPanel({
       )}
 
       <p className={styles.phaseNote}>
-        FFmpeg final render with captions — Phase 5.
+        Final FFmpeg render with captions — use the Render panel below.
       </p>
     </div>
   );

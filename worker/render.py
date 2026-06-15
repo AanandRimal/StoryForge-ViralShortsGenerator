@@ -197,7 +197,7 @@ def build_ass_file(
                 current_word_start, current_word_end, _ = chunk[j]
                 
                 parts = []
-                for k in range(len(chunk)):
+                for k in range(j + 1):
                     start_k, end_k, word_k = chunk[k]
                     escaped_word = escape_ass_text(word_k)
                     if k == j:

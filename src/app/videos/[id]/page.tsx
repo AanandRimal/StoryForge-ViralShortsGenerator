@@ -52,6 +52,7 @@ export default async function VideoDetailPage({
             status={video.status}
             hasAudio={!!video.audioPath}
             hasVisuals={!!visuals?.scenes?.length}
+            hasVideo={!!video.videoPath}
           />
         </div>
 
@@ -78,6 +79,9 @@ export default async function VideoDetailPage({
             initialStatus={video.status}
             initialVisuals={visuals}
             initialVisualStyle={video.visualStyle}
+            initialVideoPath={video.videoPath}
+            initialThumbnailPath={video.thumbnailPath}
+            initialDuration={video.durationSeconds}
           />
         ) : (
           <div className={`glass-panel ${styles.noScript}`}>
@@ -103,13 +107,16 @@ function StatusBadge({
   status,
   hasAudio,
   hasVisuals,
+  hasVideo,
 }: {
   status: string;
   hasAudio: boolean;
   hasVisuals: boolean;
+  hasVideo: boolean;
 }) {
   let pendingLabel = "Script Ready";
-  if (hasVisuals) pendingLabel = "Visuals Ready";
+  if (hasVideo) pendingLabel = "Video Ready";
+  else if (hasVisuals) pendingLabel = "Visuals Ready";
   else if (hasAudio) pendingLabel = "Voice Ready";
 
   const labels: Record<string, string> = {

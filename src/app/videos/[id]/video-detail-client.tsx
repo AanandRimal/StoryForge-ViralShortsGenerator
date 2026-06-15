@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ScriptViewer } from "@/components/generate/ScriptViewer";
 import { VoicePanel } from "@/components/videos/VoicePanel";
 import { VisualsPanel } from "@/components/videos/VisualsPanel";
+import { RenderPanel } from "@/components/videos/RenderPanel";
 import type { ScriptJson } from "@/types/script";
 import type { VisualsJson } from "@/types/visuals";
 import styles from "./video.module.css";
@@ -20,6 +21,9 @@ export function VideoDetailClient({
   initialStatus,
   initialVisuals,
   initialVisualStyle,
+  initialVideoPath,
+  initialThumbnailPath,
+  initialDuration,
 }: {
   videoId: string;
   initialScript: ScriptJson;
@@ -32,8 +36,13 @@ export function VideoDetailClient({
   initialStatus: string;
   initialVisuals: VisualsJson | null;
   initialVisualStyle: string | null;
+  initialVideoPath: string | null;
+  initialThumbnailPath: string | null;
+  initialDuration: number | null;
 }) {
   const [script, setScript] = useState(initialScript);
+  const [audioPath, setAudioPath] = useState(initialAudioPath);
+  const [visuals, setVisuals] = useState(initialVisuals);
   const [regenerating, setRegenerating] = useState(false);
   const [error, setError] = useState("");
 
@@ -69,18 +78,30 @@ export function VideoDetailClient({
       <VoicePanel
         videoId={videoId}
         script={script}
-        initialAudioPath={initialAudioPath}
+        initialAudioPath={audioPath}
         initialVoiceId={initialVoiceId}
         initialProvider={initialProvider}
         nicheDefaultVoice={nicheDefaultVoice}
         initialStatus={initialStatus}
+        onAudioChange={setAudioPath}
       />
 
       <VisualsPanel
         videoId={videoId}
-        initialVisuals={initialVisuals}
+        initialVisuals={visuals}
         initialStyle={initialVisualStyle}
         initialStatus={initialStatus}
+        onVisualsChange={setVisuals}
+      />
+
+      <RenderPanel
+        videoId={videoId}
+        initialVideoPath={initialVideoPath}
+        initialThumbnailPath={initialThumbnailPath}
+        initialDuration={initialDuration}
+        initialStatus={initialStatus}
+        hasAudio={!!audioPath}
+        hasVisuals={!!visuals?.scenes?.length}
       />
 
       <div className={styles.scriptArea}>
