@@ -49,4 +49,5 @@ public/outputs/audio/*.mp3
 public/outputs/visuals/**/*.mp4
 public/outputs/visuals/**/*.jpg
 public/outputs/video/*.mp4
+public/outputs/video/*.jpg
 worker/venv/
