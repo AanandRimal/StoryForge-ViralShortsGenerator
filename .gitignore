@@ -14,8 +14,8 @@
 /coverage
 
 # next.js
-/.next/
-/out/
+/frontend/.next/
+/frontend/out/
 
 # production
 /build
@@ -40,14 +40,16 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-/src/generated/prisma
+/frontend/src/generated/prisma
 
-bin/
+/backend/bin/
 
 # Generated media (keep directory structure)
-public/outputs/audio/*.mp3
-public/outputs/visuals/**/*.mp4
-public/outputs/visuals/**/*.jpg
-public/outputs/video/*.mp4
-public/outputs/video/*.jpg
-worker/venv/
+frontend/public/outputs/audio/*.mp3
+frontend/public/outputs/visuals/**/*.mp4
+frontend/public/outputs/visuals/**/*.jpg
+frontend/public/outputs/video/*.mp4
+frontend/public/outputs/video/*.jpg
+backend/worker/venv/
+*.pyc
+__pycache__/
