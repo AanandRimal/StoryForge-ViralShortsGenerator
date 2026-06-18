@@ -1,25 +1,14 @@
 {
-  "name": "storyforge-monorepo",
+  "name": "storyforge",
   "version": "0.1.0",
   "private": true,
-  "workspaces": [
-    "frontend"
-  ],
   "scripts": {
-    "dev": "npm run dev --workspace=frontend",
-    "build": "npm run build --workspace=frontend",
-    "start": "npm run start --workspace=frontend",
-    "lint": "npm run lint --workspace=frontend",
-    "db:generate": "prisma generate",
-    "db:migrate": "prisma migrate dev",
-    "db:push": "prisma db push",
-    "db:seed": "prisma db seed"
-  },
-  "devDependencies": {
-    "prisma": "^7.8.0",
-    "tsx": "^4.20.3"
-  },
-  "prisma": {
-    "seed": "tsx backend/prisma/seed.ts"
+    "dev": "npm --prefix frontend run dev",
+    "build": "npm --prefix frontend run build",
+    "start": "npm --prefix frontend run start",
+    "db:generate": "npm --prefix frontend run db:generate",
+    "db:migrate": "npm --prefix frontend run db:migrate",
+    "db:push": "npm --prefix frontend run db:push",
+    "db:seed": "npm --prefix frontend run db:seed"
   }
 }

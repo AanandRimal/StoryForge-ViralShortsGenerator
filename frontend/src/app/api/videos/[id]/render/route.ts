@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/api-auth";
 import { prisma } from "@/lib/prisma";
-import { renderVideoForVideo } from "@/lib/pipelines/render/render-pipeline";
+import { renderVideoForVideo } from "@/lib/pipeline/audio-visual-render/render-pipeline";
 import { clearRenderForVideo } from "@/lib/render-storage";
 import type { ScriptJson } from "@/types/script";
 import type { VisualsJson } from "@/types/visuals";

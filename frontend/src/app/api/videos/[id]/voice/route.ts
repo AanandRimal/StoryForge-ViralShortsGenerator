@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/api-auth";
 import { prisma } from "@/lib/prisma";
-import { generateVoiceAudio } from "@/lib/pipelines/voice/voice-engine";
+import { generateVoiceAudio } from "@/lib/pipeline/audio-generation/voice-engine";
 import { defaultVoiceForLanguage } from "@/lib/voices";
 import type { ScriptJson } from "@/types/script";
 

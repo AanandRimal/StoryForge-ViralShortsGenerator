@@ -5,10 +5,10 @@ import json
 import os
 import sys
 
-# Ensure backend/worker/render and backend/worker/visuals are in python path
+# Ensure audio-visual-render and visual-generation are in python path
 current_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(current_dir)
-sys.path.append(os.path.join(os.path.dirname(current_dir), "visuals"))
+sys.path.append(os.path.join(os.path.dirname(current_dir), "visual-generation"))
 
 from dotenv import load_dotenv
 

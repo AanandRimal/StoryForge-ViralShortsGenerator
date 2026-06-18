@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/api-auth";
 import { prisma } from "@/lib/prisma";
-import { generateScript } from "@/lib/pipelines/script/script-generator";
+import { generateScript } from "@/lib/pipeline/script-generation/script-generator";
 import type { VideoLanguage } from "@/types/script";
 
 function parseLanguage(value: unknown): VideoLanguage {
