@@ -59,6 +59,7 @@ __pycache__/
 backend/worker/venv/
 backend/pipeline/*/venv/
 *.egg-info/
+/backend/venv
 
 # ── Generated media outputs (keep directory structure) ────────
 frontend/public/outputs/audio/*.mp3
