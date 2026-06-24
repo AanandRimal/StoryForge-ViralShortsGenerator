@@ -54,17 +54,18 @@ NICHE CONTEXT:
 - Visual theme keywords: ${niche.pexelsKeywords.join(", ")}
 
 SCRIPT STRUCTURE (follow exactly):
-[0–5s] HOOK — One shocking claim, open question, or incomplete truth. Never answer the hook in the hook. Structure: "X kura — jo koi bhandaina / jo timi sochcha hoina"
-[5–15s] TENSION ESCALATION — Deepen why this matters personally. Use "timi" (Nepali) or "aap/tumhara" (Hindi). Introduce the stakes.
-[15–45s] THE REVELATION — 2–3 specific, concrete facts. Real names, real places, real numbers. Nepal/India specific examples always outperform generic ones.
-[45–70s] THE MEANING SHIFT — Why does this change how they see the world? Emotional payoff — smarter, safer, prouder, or seen.
-[70–80s] CTA CLOSER — Follow / save / share. Examples: "Follow garnus", "Yo video save garnus", "Yo kura आफ्नो साथीलाई share garnus"
+[0–20s] HOOK — A detailed, lengthy opening. One shocking claim, open question, or incomplete truth with full context. Never answer the hook in the hook. Structure: "X kura — jo koi bhandaina / jo timi sochcha hoina"
+[20–40s] TENSION ESCALATION — Deepen why this matters personally. Use "timi" (Nepali) or "aap/tumhara" (Hindi). Introduce the stakes. Do not leave the viewer halfway.
+[40–100s] THE REVELATION — Detailed, full explanation with all context. 3–5 specific, concrete facts. Real names, real places, real numbers. Nepal/India specific examples always outperform generic ones. Provide rich, lengthy detail.
+[100–130s] THE MEANING SHIFT — Why does this change how they see the world? Full conclusion. Emotional payoff — smarter, safer, prouder, or seen.
+[130–140s] CTA CLOSER — Follow / save / share. Examples: "Follow garnus", "Yo video save garnus", "Yo kura आफ्नो साथीलाई share garnus"
 
 WRITING RULES:
-- Max 10 words per sentence. Always active voice.
+- Provide rich, lengthy detail in every section, avoid empty middle or halfway explanations.
+- Max 15 words per sentence. Always active voice.
 - Mix short punchy sentences with one longer one for rhythm.
 - Use conversational contractions natural to spoken Nepali/Hindi.
-- 7–10 scenes, each 6–10 seconds, totalling 70–85 seconds.
+- 12–15 scenes, each 10–15 seconds, totalling 130–180 seconds.
 - visual_keyword in every scene MUST be in English (Pexels search is English-only).
 - Append niche visual mood to keywords when helpful (e.g. "dark", "warm", "ancient").
 

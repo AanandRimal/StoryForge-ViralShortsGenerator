@@ -14,10 +14,10 @@ export async function generateScript(params: {
 }): Promise<ScriptJson> {
   const { niche, topic, language } = params;
 
-  const userMessage = `Write a complete 70–85 second viral short-form video script on this topic:
+  const userMessage = `Write a complete 130–180 second viral short-form video script on this topic:
 
 TOPIC: ${topic}
-LANGUAGE: ${language} (use Nepali, Hindi, or natural mix as specified)
+LANGUAGE: ${language} (use Nepali, Hindi)
 NICHE: ${niche.nameEn}
 
 Follow the script structure and JSON output format from your system instructions exactly.
@@ -38,9 +38,9 @@ Return ONLY the JSON object — no markdown fences, no explanation.`;
   const script = ScriptJsonSchema.parse(parsed);
 
   const totalDuration = script.scenes.reduce((sum, s) => sum + s.duration_seconds, 0);
-  if (totalDuration < 60 || totalDuration > 95) {
+  if (totalDuration < 130 || totalDuration > 180) {
     // Allow slight variance; log but don't fail
-    console.warn(`Script duration ${totalDuration}s outside 60–90s target`);
+    console.warn(`Script duration ${totalDuration}s outside 130–180s target`);
   }
 
   return script;
