@@ -10,5 +10,9 @@
     "db:migrate": "npm --prefix frontend run db:migrate",
     "db:push": "npm --prefix frontend run db:push",
     "db:seed": "npm --prefix frontend run db:seed"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2"
   }
 }

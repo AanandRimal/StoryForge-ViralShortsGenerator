@@ -73,3 +73,7 @@ frontend/public/outputs/video/*.jpg
 
 # ── Misc ──────────────────────────────────────────────────────
 storyforge_plan*.md
+AGENTS.md
+CLAUDE.md
+agents.md
+claude.md
