@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./RecentVideos.module.css";
 
 type RecentVideo = {
@@ -6,7 +7,9 @@ type RecentVideo = {
   title: string | null;
   status: string;
   createdAt: Date;
+  thumbnailUrl: string | null;
   niche: { emoji: string; nameEn: string };
+  creator: { name: string };
 };
 
 const STATUS_STYLES: Record<string, { label: string; className: string }> = {
@@ -21,7 +24,13 @@ const STATUS_STYLES: Record<string, { label: string; className: string }> = {
   FAILED: { label: "Failed", className: styles.statusFailed },
 };
 
-export function RecentVideos({ videos }: { videos: RecentVideo[] }) {
+export function RecentVideos({
+  videos,
+  isAdmin = false,
+}: {
+  videos: RecentVideo[];
+  isAdmin?: boolean;
+}) {
   if (videos.length === 0) {
     return (
       <section className={styles.section}>
@@ -52,13 +61,27 @@ export function RecentVideos({ videos }: { videos: RecentVideo[] }) {
               className={styles.card}
             >
               <div className={styles.thumb}>
-                <span className={styles.thumbEmoji}>{video.niche.emoji}</span>
+                {video.thumbnailUrl ? (
+                  <Image
+                    src={video.thumbnailUrl}
+                    alt={video.title ?? "Video thumbnail"}
+                    fill
+                    sizes="80px"
+                    className={styles.thumbImg}
+                    unoptimized
+                  />
+                ) : (
+                  <span className={styles.thumbEmoji}>{video.niche.emoji}</span>
+                )}
               </div>
               <div className={styles.info}>
                 <p className={styles.videoTitle}>
                   {video.title ?? "Untitled video"}
                 </p>
                 <p className={styles.nicheName}>{video.niche.nameEn}</p>
+                {isAdmin && (
+                  <p className={styles.creatorName}>{video.creator.name}</p>
+                )}
                 <span className={`${styles.status} ${status.className}`}>
                   {status.label}
                 </span>

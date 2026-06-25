@@ -1,22 +1,28 @@
 import { prisma } from "@/lib/prisma";
 
-export async function getDashboardStats() {
+export async function getDashboardStats(userId?: string) {
   const startOfDay = new Date();
   startOfDay.setHours(0, 0, 0, 0);
+
+  const userFilter = userId ? { creatorId: userId } : {};
 
   const [videosToday, totalPublished, viewAggregate, queueDepth] =
     await Promise.all([
       prisma.video.count({
-        where: { createdAt: { gte: startOfDay } },
+        where: { ...userFilter, createdAt: { gte: startOfDay } },
       }),
       prisma.video.count({
-        where: { status: "PUBLISHED" },
+        where: { ...userFilter, status: "PUBLISHED" },
       }),
       prisma.publishedVideo.aggregate({
         _sum: { views: true },
+        ...(userId
+          ? { where: { video: { creatorId: userId } } }
+          : {}),
       }),
       prisma.video.count({
         where: {
+          ...userFilter,
           status: {
             in: [
               "PENDING",

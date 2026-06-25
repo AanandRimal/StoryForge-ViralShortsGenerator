@@ -11,6 +11,7 @@ const NAV_ITEMS = [
 
 export async function AppHeader() {
   const session = await auth();
+  const isAdmin = session?.user?.role === "ADMIN";
 
   return (
     <header className={styles.header}>
@@ -28,10 +29,18 @@ export async function AppHeader() {
               {item.label}
             </Link>
           ))}
+          {isAdmin && (
+            <Link href="/admin" className={styles.adminLink}>
+              Admin
+            </Link>
+          )}
         </nav>
 
         <div className={styles.userArea}>
-          <span className={styles.userName}>{session?.user?.name}</span>
+          <div className={styles.userInfo}>
+            <span className={styles.userName}>{session?.user?.name}</span>
+            {isAdmin && <span className={styles.adminBadge}>Admin</span>}
+          </div>
           <form
             action={async () => {
               "use server";

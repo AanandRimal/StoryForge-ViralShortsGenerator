@@ -24,16 +24,14 @@ export const authConfig = {
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
       const { pathname } = nextUrl;
-      const isLoginPage = pathname === "/login";
-      const isAuthApi = pathname.startsWith("/api/auth");
+      const isPublic =
+        pathname === "/login" ||
+        pathname === "/signup" ||
+        pathname.startsWith("/api/auth");
 
-      // Auth API must stay public — signIn() fetches these as JSON
-      if (isAuthApi) {
-        return true;
-      }
-
-      if (isLoginPage) {
-        if (isLoggedIn) {
+      if (isPublic) {
+        // Redirect logged-in users away from login/signup
+        if (isLoggedIn && (pathname === "/login" || pathname === "/signup")) {
           return Response.redirect(new URL("/", nextUrl));
         }
         return true;

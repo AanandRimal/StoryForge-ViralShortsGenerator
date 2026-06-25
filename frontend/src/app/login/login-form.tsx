@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState } from "react";
 import { signIn } from "next-auth/react";
+import Link from "next/link";
 import styles from "./login.module.css";
 
 export function LoginForm() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     setError("");
     setLoading(true);
@@ -43,8 +44,7 @@ export function LoginForm() {
           type="email"
           required
           autoComplete="email"
-          placeholder="admin@storyforge.local"
-          defaultValue="admin@storyforge.local"
+          placeholder="you@example.com"
         />
       </div>
       <div className={styles.field}>
@@ -63,7 +63,8 @@ export function LoginForm() {
         {loading ? "Signing in…" : "Sign in"}
       </button>
       <p className={styles.hint}>
-        Default: admin@storyforge.local / storyforge2024
+        Don&apos;t have an account?{" "}
+        <Link href="/signup" className={styles.hintLink}>Create one</Link>
       </p>
     </form>
   );
