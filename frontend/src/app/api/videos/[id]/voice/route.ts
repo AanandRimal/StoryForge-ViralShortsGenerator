@@ -53,7 +53,7 @@ export async function POST(
     const updated = await prisma.video.update({
       where: { id },
       data: {
-        audioPath,
+        audioPath,        // absolute filesystem path stored in DB
         voiceId,
         voiceProvider: provider,
         status: "PENDING",
@@ -64,7 +64,7 @@ export async function POST(
     return NextResponse.json({
       video: updated,
       provider,
-      audioUrl: audioPath,
+      audioUrl: `/api/videos/${id}/audio`,
     });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Voice generation failed";

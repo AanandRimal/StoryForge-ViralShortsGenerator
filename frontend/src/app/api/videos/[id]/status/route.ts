@@ -34,5 +34,13 @@ export async function GET(
     return NextResponse.json({ error: "Video not found" }, { status: 404 });
   }
 
-  return NextResponse.json({ video });
+  // Return API URLs for media so clients never get raw filesystem paths
+  return NextResponse.json({
+    video: {
+      ...video,
+      audioPath: video.audioPath ? `/api/videos/${id}/audio` : null,
+      videoPath: video.videoPath ? `/api/videos/${id}/stream` : null,
+      thumbnailPath: video.thumbnailPath ? `/api/videos/${id}/thumbnail` : null,
+    },
+  });
 }

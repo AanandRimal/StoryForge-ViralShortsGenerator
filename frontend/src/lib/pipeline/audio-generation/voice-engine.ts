@@ -2,21 +2,12 @@ import { TextToSpeechClient } from "@google-cloud/text-to-speech";
 import fs from "node:fs/promises";
 import path from "node:path";
 import { spawn } from "node:child_process";
+import { outputRoot } from "@/lib/render-storage";
 
 const SPEAKING_RATE = 0.9;
 
-function resolveOutputDir(): string {
-  const dir = process.env.VIDEO_OUTPUT_DIR;
-  if (dir) return dir;
-  return path.join(process.cwd(), "public", "outputs");
-}
-
-export function audioPublicPath(videoId: string): string {
-  return `/outputs/audio/${videoId}.mp3`;
-}
-
 export function audioAbsolutePath(videoId: string): string {
-  return path.join(resolveOutputDir(), "audio", `${videoId}.mp3`);
+  return path.join(outputRoot(), "audio", `${videoId}.mp3`);
 }
 
 function languageCode(voiceId: string): string {
@@ -102,16 +93,16 @@ export async function generateVoiceAudio(params: {
   videoId: string;
   text: string;
   voiceId: string;
-}): Promise<{ audioPath: string; provider: string; absolutePath: string }> {
-  const absolutePath = audioAbsolutePath(params.videoId);
-  const publicPath = audioPublicPath(params.videoId);
+}): Promise<{ audioPath: string; provider: string }> {
+  const absPath = audioAbsolutePath(params.videoId);
+  await fs.mkdir(path.dirname(absPath), { recursive: true });
 
   try {
-    await synthesizeGoogle(params.text, params.voiceId, absolutePath);
-    return { audioPath: publicPath, provider: "google", absolutePath };
+    await synthesizeGoogle(params.text, params.voiceId, absPath);
+    return { audioPath: absPath, provider: "google" };
   } catch (googleErr) {
     console.warn("Google TTS failed, trying edge-tts fallback:", googleErr);
-    await synthesizeEdgeFallback(params.text, params.voiceId, absolutePath);
-    return { audioPath: publicPath, provider: "edge", absolutePath };
+    await synthesizeEdgeFallback(params.text, params.voiceId, absPath);
+    return { audioPath: absPath, provider: "edge" };
   }
 }

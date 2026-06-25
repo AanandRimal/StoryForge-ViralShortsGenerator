@@ -78,8 +78,9 @@ export function VoicePanel({
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Voice generation failed");
 
-      setAudioPath(data.audioUrl);
-      onAudioChange?.(data.audioUrl);
+      const newAudioPath = data.audioUrl ?? `/api/videos/${videoId}/audio`;
+      setAudioPath(newAudioPath);
+      onAudioChange?.(newAudioPath);
       setProvider(data.provider);
       setStatus(data.video.status);
     } catch (err) {
