@@ -1,0 +1,101 @@
+.pageHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.addBtn {
+  background: var(--accent-purple);
+  color: #fff;
+  padding: 0.5rem 1.25rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.addBtn:hover {
+  background: var(--accent-purple-hover);
+}
+
+.table {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 1fr 100px 80px 110px 130px;
+  padding: 0.75rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--border-color);
+  background: var(--bg-darker);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 100px 80px 110px 130px;
+  padding: 0.85rem 1rem;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.row:last-child {
+  border-bottom: none;
+}
+
+.name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.email {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.roleBadge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  width: fit-content;
+  letter-spacing: 0.04em;
+}
+
+.roleAdmin  { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); }
+.roleEditor { background: var(--bg-darker); color: var(--text-muted); }
+
+.count {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.date {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.viewLink {
+  font-size: 0.82rem;
+  color: var(--accent-purple);
+  font-weight: 500;
+}
+
+.viewLink:hover {
+  text-decoration: underline;
+}
