@@ -72,15 +72,15 @@ export default async function VideoDetailPage({
             initialScript={script}
             accentColor={video.niche.captionColor}
             topic={video.title ?? ""}
-            initialAudioPath={video.audioPath}
+            initialAudioPath={video.audioPath ? `/api/videos/${video.id}/audio` : null}
             initialVoiceId={video.voiceId}
             initialProvider={video.voiceProvider}
             nicheDefaultVoice={video.niche.defaultVoiceId}
             initialStatus={video.status}
             initialVisuals={visuals}
             initialVisualStyle={video.visualStyle}
-            initialVideoPath={video.videoPath}
-            initialThumbnailPath={video.thumbnailPath}
+            initialVideoPath={video.videoPath ? `/api/videos/${video.id}/stream` : null}
+            initialThumbnailPath={video.thumbnailPath ? `/api/videos/${video.id}/thumbnail` : null}
             initialDuration={video.durationSeconds}
           />
         ) : (

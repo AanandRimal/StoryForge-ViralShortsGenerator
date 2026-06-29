@@ -42,6 +42,7 @@ export function RenderPanel({
     setHasAudio(!!v.audioPath);
     setHasVisuals(!!v.visualsJson?.scenes?.length);
     if (v.videoPath) setVideoPath(v.videoPath);
+    if (v.thumbnailPath) setThumbnailPath(v.thumbnailPath);
     if (v.durationSeconds) setDuration(v.durationSeconds);
     if (v.errorMessage) setError(v.errorMessage);
 

@@ -5,7 +5,7 @@ import { getOrCreateTopicSuggestions } from "@/lib/topic-generator";
 import type { VideoLanguage } from "@/types/script";
 
 function parseLanguage(value: string | null): VideoLanguage {
-  if (value === "hindi" || value === "mixed") return value;
+  if (value === "hindi" || value === "english") return value;
   return "nepali";
 }
 

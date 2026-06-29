@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { Prisma } from "@/generated/prisma/client";
 import { requireAuth } from "@/lib/api-auth";
 import { prisma } from "@/lib/prisma";
-import { generateScript } from "@/lib/pipelines/script/script-generator";
+import { generateScript } from "@/lib/pipeline/script-generation/script-generator";
 import { clearVisualsForVideo } from "@/lib/visual-storage";
 import { clearRenderForVideo } from "@/lib/render-storage";
 import type { ScriptJson, VideoLanguage } from "@/types/script";

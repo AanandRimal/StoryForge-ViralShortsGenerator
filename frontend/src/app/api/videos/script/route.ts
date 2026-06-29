@@ -5,7 +5,7 @@ import { generateScript } from "@/lib/pipeline/script-generation/script-generato
 import type { VideoLanguage } from "@/types/script";
 
 function parseLanguage(value: unknown): VideoLanguage {
-  if (value === "hindi" || value === "mixed") return value;
+  if (value === "hindi" || value === "english") return value;
   return "nepali";
 }
 

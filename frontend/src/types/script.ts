@@ -10,7 +10,7 @@ export const SceneSchema = z.object({
 export const ScriptJsonSchema = z.object({
   title: z.string().min(1).max(120),
   hook: z.string().min(1),
-  language: z.enum(["nepali", "hindi", "mixed"]),
+  language: z.enum(["nepali", "hindi", "english"]),
   scenes: z.array(SceneSchema).min(5).max(12),
   full_script: z.string().min(1),
   cta: z.string().min(1),
@@ -24,7 +24,7 @@ export type ScriptScene = z.infer<typeof SceneSchema>;
 export const TopicSuggestionSchema = z.object({
   title: z.string().min(1),
   hookPreview: z.string().min(1),
-  language: z.enum(["nepali", "hindi", "mixed"]),
+  language: z.enum(["nepali", "hindi", "english"]),
   trendingScore: z.number().min(0).max(100),
 });
 
@@ -34,4 +34,4 @@ export const TopicSuggestionsSchema = z.object({
 
 export type TopicSuggestion = z.infer<typeof TopicSuggestionSchema>;
 
-export type VideoLanguage = "nepali" | "hindi" | "mixed";
+export type VideoLanguage = "nepali" | "hindi" | "english";

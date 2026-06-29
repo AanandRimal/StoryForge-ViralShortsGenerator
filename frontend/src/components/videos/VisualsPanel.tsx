@@ -146,7 +146,7 @@ export function VisualsPanel({
               </div>
               <video
                 className={styles.scenePreview}
-                src={scene.clip_path}
+                src={`/api/videos/${videoId}/visuals/${scene.clip_path.split("/").pop()}`}
                 muted
                 loop
                 playsInline

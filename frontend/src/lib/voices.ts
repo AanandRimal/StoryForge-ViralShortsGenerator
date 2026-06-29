@@ -2,7 +2,7 @@ export type VoiceOption = {
   id: string;
   label: string;
   description: string;
-  language: "nepali" | "hindi";
+  language: "nepali" | "hindi" | "english";
   gender: "male" | "female";
 };
 
@@ -35,6 +35,20 @@ export const VOICE_OPTIONS: VoiceOption[] = [
     language: "hindi",
     gender: "female",
   },
+  {
+    id: "en-US-Neural2-D",
+    label: "English Male",
+    description: "Professional, clear",
+    language: "english",
+    gender: "male",
+  },
+  {
+    id: "en-US-Neural2-F",
+    label: "English Female",
+    description: "Engaging, warm",
+    language: "english",
+    gender: "female",
+  },
 ];
 
 export function defaultVoiceForLanguage(language: string, nicheDefault?: string): string {
@@ -42,6 +56,7 @@ export function defaultVoiceForLanguage(language: string, nicheDefault?: string)
     return nicheDefault;
   }
   if (language === "hindi") return "hi-IN-Neural2-C";
+  if (language === "english") return "en-US-Neural2-D";
   return "ne-NP-Standard-B";
 }
 

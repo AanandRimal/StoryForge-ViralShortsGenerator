@@ -67,9 +67,14 @@ frontend/public/outputs/visuals/**/*.mp4
 frontend/public/outputs/visuals/**/*.jpg
 frontend/public/outputs/video/*.mp4
 frontend/public/outputs/video/*.jpg
+/frontend/data
 
 # ── Vercel ────────────────────────────────────────────────────
 .vercel
 
 # ── Misc ──────────────────────────────────────────────────────
 storyforge_plan*.md
+AGENTS.md
+CLAUDE.md
+agents.md
+claude.md

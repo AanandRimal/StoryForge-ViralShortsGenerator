@@ -9,46 +9,74 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  padding: 1.25rem 1.5rem;
-  animation: fadeIn 0.4s ease backwards;
+  padding: 1.25rem 1.25rem 1.25rem 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
 }
 
-.card:nth-child(1) { animation-delay: 0.05s; }
-.card:nth-child(2) { animation-delay: 0.1s; }
-.card:nth-child(3) { animation-delay: 0.15s; }
-.card:nth-child(4) { animation-delay: 0.2s; }
+.card:hover {
+  border-color: var(--border-color-hover) !important;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; bottom: 0;
+  width: 3px;
+  border-radius: 0 2px 2px 0;
+}
+
+.card:nth-child(1)::before { background: var(--color-info); }
+.card:nth-child(2)::before { background: var(--color-success); }
+.card:nth-child(3)::before { background: var(--color-warning); }
+.card:nth-child(4)::before { background: var(--accent-purple-mid); }
 
 .icon {
-  font-size: 1.75rem;
+  width: 46px; height: 46px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+  flex-shrink: 0;
+  border: 1px solid transparent;
 }
+
+.card:nth-child(1) .icon { background: rgba(59,130,246,0.12); border-color: rgba(59,130,246,0.2); }
+.card:nth-child(2) .icon { background: rgba(16,185,129,0.12); border-color: rgba(16,185,129,0.2); }
+.card:nth-child(3) .icon { background: rgba(245,158,11,0.12); border-color: rgba(245,158,11,0.2); }
+.card:nth-child(4) .icon { background: rgba(124,90,246,0.12); border-color: rgba(124,90,246,0.2); }
 
 .content {
   display: flex;
   flex-direction: column;
-  gap: 0.125rem;
+  gap: 0.1rem;
+  min-width: 0;
 }
 
 .value {
-  font-size: 1.75rem;
+  font-size: 1.65rem;
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   line-height: 1;
+  color: var(--text-primary);
 }
 
 .label {
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   font-weight: 500;
+  white-space: nowrap;
 }
 
-@media (max-width: 900px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media (max-width: 480px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+  .value { font-size: 1.4rem; }
 }

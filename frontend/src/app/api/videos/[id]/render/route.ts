@@ -2,7 +2,11 @@ import { NextResponse } from "next/server";
 import { requireAuth } from "@/lib/api-auth";
 import { prisma } from "@/lib/prisma";
 import { renderVideoForVideo } from "@/lib/pipeline/audio-visual-render/render-pipeline";
-import { clearRenderForVideo } from "@/lib/render-storage";
+import {
+  clearRenderForVideo,
+  videoAbsolutePath,
+  thumbnailAbsolutePath,
+} from "@/lib/render-storage";
 import type { ScriptJson } from "@/types/script";
 import type { VisualsJson } from "@/types/visuals";
 
@@ -73,8 +77,8 @@ export async function POST(
     const updated = await prisma.video.update({
       where: { id },
       data: {
-        videoPath: result.video_path,
-        thumbnailPath: result.thumbnail_path,
+        videoPath: videoAbsolutePath(id),
+        thumbnailPath: thumbnailAbsolutePath(id),
         durationSeconds: result.duration_seconds,
         status: "READY",
         errorMessage: null,
@@ -82,7 +86,14 @@ export async function POST(
       },
     });
 
-    return NextResponse.json({ video: updated, render: result });
+    return NextResponse.json({
+      video: updated,
+      render: {
+        duration_seconds: result.duration_seconds,
+        video_path: `/api/videos/${id}/stream`,
+        thumbnail_path: `/api/videos/${id}/thumbnail`,
+      },
+    });
   } catch (err) {
     const message =
       err instanceof Error ? err.message : "Video render failed";
