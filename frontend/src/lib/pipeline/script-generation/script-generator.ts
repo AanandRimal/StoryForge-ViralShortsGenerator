@@ -17,7 +17,7 @@ export async function generateScript(params: {
   const userMessage = `Write a complete 130–180 second viral short-form video script on this topic:
 
 TOPIC: ${topic}
-LANGUAGE: ${language} (use Nepali, Hindi)
+LANGUAGE: ${language} (write in ${language === "nepali" ? "Nepali" : language === "hindi" ? "Hindi" : language === "english" ? "English" : "a mix of Nepali and Hindi"})
 NICHE: ${niche.nameEn}
 
 Follow the script structure and JSON output format from your system instructions exactly.

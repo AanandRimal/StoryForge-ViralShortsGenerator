@@ -48,8 +48,11 @@ def ffprobe_bin() -> str:
 
 
 def public_to_abs(public_path: str) -> Path:
-    rel = public_path.removeprefix("/outputs/").lstrip("/")
-    return output_root() / rel
+    # Paths stored as "/outputs/..." are relative to output_root, not filesystem root.
+    # Real absolute paths (e.g. audio stored as full /home/... path) are returned as-is.
+    if public_path.startswith("/outputs/"):
+        return output_root() / public_path.removeprefix("/outputs/")
+    return Path(public_path)
 
 
 def probe_duration(path: Path) -> float:

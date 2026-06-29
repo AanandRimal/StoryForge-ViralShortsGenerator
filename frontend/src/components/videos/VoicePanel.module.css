@@ -1,36 +1,35 @@
-.panel {
-  margin-bottom: 2rem;
-  padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border-color);
-}
+.panel {}
 
-.header {
+/* ── Header ───────────────────────────────────── */
+.panelHeader {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+  gap: 1rem;
 }
 
-.heading {
+.panelEyebrow {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-purple-mid);
+  margin-bottom: 0.2rem;
+}
+
+.panelTitle {
   font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0;
 }
 
-.providerBadge {
-  font-size: 0.75rem;
-  padding: 0.25rem 0.625rem;
-  border-radius: 6px;
-  background: var(--color-info-bg);
-  color: var(--color-info);
-  font-weight: 500;
-}
-
+/* ── AI voice grid ────────────────────────────── */
 .voiceGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
-  margin-bottom: 1.25rem;
+  gap: 0.625rem;
+  margin-bottom: 1rem;
 }
 
 .voiceCard {
@@ -38,13 +37,13 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 0.2rem;
-  padding: 1rem;
-  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  border-radius: 10px;
   border: 1px solid var(--border-color);
   background: var(--bg-card);
   cursor: pointer;
   text-align: left;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .voiceCard:hover:not(:disabled) {
@@ -54,89 +53,175 @@
 
 .voiceCardActive {
   border-color: var(--accent-purple);
-  background: var(--accent-purple-glow);
+  background: var(--accent-purple-deep);
+  box-shadow: 0 0 0 1px var(--accent-purple-glow);
 }
 
-.voiceCard:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.voiceCard:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.voiceLabel { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+.voiceDesc  { font-size: 0.78rem; color: var(--text-secondary); }
+.voiceId    { font-size: 0.62rem; color: var(--text-muted); font-family: monospace; margin-top: 0.2rem; }
+
+.statusHint {
+  font-size: 0.82rem;
+  color: var(--color-info);
+  text-align: center;
+  margin-top: 0.75rem;
 }
 
-.voiceLabel {
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.voiceDesc {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-}
-
-.voiceId {
-  font-size: 0.65rem;
-  color: var(--text-muted);
-  font-family: monospace;
-  margin-top: 0.25rem;
-}
-
-.error {
-  color: var(--color-danger);
-  font-size: 0.875rem;
-  margin-bottom: 1rem;
-}
-
-.generateBtn {
-  width: 100%;
-  padding: 0.875rem;
-  border-radius: 10px;
-  border: none;
-  background: var(--accent-purple);
-  color: white;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 1rem;
-}
-
-.generateBtn:hover:not(:disabled) {
-  background: var(--accent-purple-hover);
-}
-
-.generateBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.player {
+/* ── Custom section ───────────────────────────── */
+.customSection {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1.25rem;
 }
 
-.playerLabel {
-  font-size: 0.75rem;
-  font-weight: 600;
+/* Script box */
+.scriptBox {
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.scriptBoxTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.875rem;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.scriptBoxLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
   color: var(--text-muted);
 }
 
-.audio {
-  width: 100%;
+.scriptText {
+  padding: 1rem 0.875rem;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  white-space: pre-wrap;
+  max-height: 200px;
+  overflow-y: auto;
+  font-family: inherit;
+  margin: 0;
+  background: var(--bg-input);
+}
+
+/* Input mode */
+.inputModeLabel {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0;
+}
+
+.inputArea {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.modeHint {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Recording */
+.recordDot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--color-danger);
+  animation: pulseGlow 1.2s ease infinite;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+.recordedPreview {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.previewAudio { width: 100%; border-radius: 8px; }
+
+/* File upload */
+.fileDropZone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 1.4rem 1rem;
+  border-radius: 10px;
+  border: 2px dashed var(--border-color);
+  background: var(--bg-input);
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.fileDropZone:hover {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple-deep);
+}
+
+.fileInput {
+  position: absolute;
+  width: 1px; height: 1px;
+  opacity: 0; overflow: hidden;
+  pointer-events: none;
+}
+
+.fileDropIcon { font-size: 1.6rem; }
+.fileDropText { font-size: 0.875rem; font-weight: 500; color: var(--text-secondary); }
+.fileDropSub  { font-size: 0.7rem; color: var(--text-muted); font-family: monospace; }
+
+/* Status */
+.errorMsg {
+  color: var(--color-danger);
+  font-size: 0.82rem;
+  background: var(--color-danger-bg);
+  border: 1px solid rgba(239,68,68,0.18);
+  padding: 0.6rem 0.875rem;
   border-radius: 8px;
 }
 
-.statusHint {
-  font-size: 0.85rem;
-  color: var(--color-info);
-  text-align: center;
-  margin-top: 0.5rem;
+.successMsg {
+  color: var(--color-success);
+  font-size: 0.82rem;
+  background: var(--color-success-bg);
+  border: 1px solid rgba(16,185,129,0.2);
+  padding: 0.6rem 0.875rem;
+  border-radius: 8px;
 }
 
+/* ── Player ───────────────────────────────────── */
+.player {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.playerLabel {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.audio { width: 100%; border-radius: 8px; }
+
 @media (max-width: 480px) {
-  .voiceGrid {
-    grid-template-columns: 1fr;
-  }
+  .voiceGrid { grid-template-columns: 1fr; }
 }

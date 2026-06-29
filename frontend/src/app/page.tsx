@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AppHeader } from "@/components/layout/AppHeader";
 import { StatsRow } from "@/components/home/StatsRow";
 import { NicheGrid } from "@/components/home/NicheGrid";
@@ -11,6 +12,7 @@ export default async function HomePage() {
   const session = await auth();
   const userId = session?.user?.id as string;
   const isAdmin = session?.user?.role === "ADMIN";
+  const firstName = session?.user?.name?.split(" ")[0] ?? "Creator";
 
   const [stats, niches, recentVideos] = await Promise.all([
     getDashboardStats(isAdmin ? undefined : userId),
@@ -54,10 +56,19 @@ export default async function HomePage() {
       <AppHeader />
       <main className={styles.main}>
         <div className={styles.hero}>
-          <h1 className={styles.heroTitle}>Dashboard</h1>
-          <p className={styles.heroSubtitle}>
-            Generate viral 60–90s shorts in Nepali &amp; Hindi
-          </p>
+          <div className={styles.heroContent}>
+            <p className={styles.heroEyebrow}>
+              <span>✦</span> Welcome back
+            </p>
+            <h1 className={styles.heroTitle}>{firstName}&apos;s Studio</h1>
+            <p className={styles.heroSubtitle}>
+              Generate viral 60–90s shorts for Nepali, Hindi &amp; English audiences — scripts, voices, visuals, auto-rendered.
+            </p>
+          </div>
+          <div className={styles.heroActions}>
+            <Link href="/queue" className="btn-ghost">View Queue</Link>
+            <Link href="/generate" className="btn-primary">+ New Video</Link>
+          </div>
         </div>
         <StatsRow stats={stats} />
         <NicheGrid niches={niches} />

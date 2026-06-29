@@ -73,10 +73,12 @@ export function GenerateWizard({
       const defaultLang =
         selectedNiche.language === "hindi"
           ? "hindi"
-          : selectedNiche.language === "mixed"
-            ? "mixed"
-            : "nepali";
-      setLanguage(defaultLang);
+          : selectedNiche.language === "english"
+            ? "english"
+            : selectedNiche.language === "mixed"
+              ? "mixed"
+              : "nepali";
+      setLanguage(defaultLang as VideoLanguage);
     }
   }, [selectedNiche]);
 
@@ -169,7 +171,7 @@ export function GenerateWizard({
 
           <div className={styles.langToggle}>
             <span className={styles.langLabel}>Language</span>
-            {(["nepali", "hindi", "mixed"] as const).map((lang) => (
+            {(["nepali", "hindi", "english", "mixed"] as const).map((lang) => (
               <button
                 key={lang}
                 type="button"
@@ -179,7 +181,13 @@ export function GenerateWizard({
                   setSelectedTopic("");
                 }}
               >
-                {lang === "nepali" ? "🇳🇵 Nepali" : lang === "hindi" ? "🇮🇳 Hindi" : "🇳🇵🇮🇳 Mixed"}
+                {lang === "nepali"
+                  ? "🇳🇵 Nepali"
+                  : lang === "hindi"
+                    ? "🇮🇳 Hindi"
+                    : lang === "english"
+                      ? "🇬🇧 English"
+                      : "🌐 Mixed"}
               </button>
             ))}
           </div>

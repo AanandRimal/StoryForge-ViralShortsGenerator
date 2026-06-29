@@ -15,24 +15,35 @@ type NicheForTopics = {
   exampleHooks: string[];
 };
 
-const TOPIC_SYSTEM = `You are a viral short-form content strategist for Nepali and Hindi audiences on TikTok, Instagram Reels, and YouTube Shorts.
+const TOPIC_SYSTEM = `You are a viral short-form content strategist for global audiences on TikTok, Instagram Reels, and YouTube Shorts.
 
 Return ONLY valid JSON — no markdown, no explanation.`;
 
 function buildTopicUserPrompt(niche: NicheForTopics, language: VideoLanguage): string {
+  const langInstruction =
+    language === "english"
+      ? "Write topics and hooks entirely in English."
+      : language === "hindi"
+        ? "Write topics and hooks in Hindi."
+        : language === "mixed"
+          ? "Write topics in a natural mix of Nepali and Hindi (romanized or Devanagari)."
+          : "Write topics and hooks in Nepali.";
+
   return `Generate exactly 5 fresh video topic ideas for the "${niche.nameEn}" (${niche.nameNe}) niche.
 
 Niche language default: ${niche.language}
 Requested output language: ${language}
+${langInstruction}
 Content angle: ${niche.contentAngle}
 Example hooks for tone reference:
 ${niche.exampleHooks.map((h) => `- ${h}`).join("\n")}
 
 Requirements:
-- Each topic must be specific to Nepal/India — real names, places, or cultural angles
+- Each topic must be specific and culturally relevant
 - hookPreview is the opening hook sentence only (max 15 words)
 - trendingScore is 1–100 (higher = more likely to go viral now)
 - Topics must feel fresh — not generic motivational content
+- Set "language" field to "${language}" in every topic
 
 Return this exact JSON shape:
 {
@@ -40,7 +51,7 @@ Return this exact JSON shape:
     {
       "title": "short topic title",
       "hookPreview": "opening hook sentence",
-      "language": "nepali or hindi or mixed",
+      "language": "${language}",
       "trendingScore": 85
     }
   ]

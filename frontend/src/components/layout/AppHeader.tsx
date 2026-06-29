@@ -1,44 +1,43 @@
 import Link from "next/link";
 import { auth, signOut } from "@/lib/auth";
+import { NavLinks } from "./NavLinks";
 import styles from "./AppHeader.module.css";
 
-const NAV_ITEMS = [
-  { href: "/", label: "Home" },
-  { href: "/queue", label: "Queue" },
-  { href: "/connections", label: "Connections" },
-  { href: "/analytics", label: "Analytics" },
-];
+function getInitials(name: string): string {
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((n) => n[0].toUpperCase())
+    .join("");
+}
 
 export async function AppHeader() {
   const session = await auth();
   const isAdmin = session?.user?.role === "ADMIN";
+  const userName = session?.user?.name ?? "";
+  const initials = getInitials(userName);
 
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
         <Link href="/" className={styles.brand}>
-          <span className={styles.brandIcon}>⚡</span>
-          <span className={styles.brandText}>
+          <span className={styles.brandMark}>⚡</span>
+          <span className={styles.brandWord}>
             Story<span className={styles.brandAccent}>Forge</span>
           </span>
         </Link>
 
-        <nav className={styles.nav}>
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.href} href={item.href} className={styles.navLink}>
-              {item.label}
-            </Link>
-          ))}
-          {isAdmin && (
-            <Link href="/admin" className={styles.adminLink}>
-              Admin
-            </Link>
-          )}
-        </nav>
+        <NavLinks isAdmin={isAdmin} />
 
         <div className={styles.userArea}>
-          <div className={styles.userInfo}>
-            <span className={styles.userName}>{session?.user?.name}</span>
+          {initials && (
+            <div className={styles.avatar} title={userName}>
+              {initials}
+            </div>
+          )}
+          <div className={styles.userMeta}>
+            <span className={styles.userName}>{userName}</span>
             {isAdmin && <span className={styles.adminBadge}>Admin</span>}
           </div>
           <form
