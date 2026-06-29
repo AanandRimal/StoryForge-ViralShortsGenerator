@@ -20,7 +20,6 @@ export type NicheCardData = {
 function languageBadge(language: string) {
   if (language === "hindi")   return { flag: "🇮🇳", label: "Hindi" };
   if (language === "english") return { flag: "🇬🇧", label: "English" };
-  if (language === "mixed")   return { flag: "🌐",  label: "Mixed" };
   return                             { flag: "🇳🇵", label: "Nepali" };
 }
 

@@ -156,7 +156,7 @@ export function VoicePanel({
   }
 
   const relevantVoices = VOICE_OPTIONS.filter((v) =>
-    script.language === "mixed" ? true : v.language === script.language,
+    v.language === script.language,
   );
   const voices = relevantVoices.length > 0 ? relevantVoices : VOICE_OPTIONS;
 

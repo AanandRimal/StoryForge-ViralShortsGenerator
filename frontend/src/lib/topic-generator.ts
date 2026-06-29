@@ -25,9 +25,7 @@ function buildTopicUserPrompt(niche: NicheForTopics, language: VideoLanguage): s
       ? "Write topics and hooks entirely in English."
       : language === "hindi"
         ? "Write topics and hooks in Hindi."
-        : language === "mixed"
-          ? "Write topics in a natural mix of Nepali and Hindi (romanized or Devanagari)."
-          : "Write topics and hooks in Nepali.";
+        : "Write topics and hooks in Nepali.";
 
   return `Generate exactly 5 fresh video topic ideas for the "${niche.nameEn}" (${niche.nameNe}) niche.
 
